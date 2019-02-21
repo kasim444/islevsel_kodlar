@@ -1,2 +1,5 @@
-# islevsel_kodlar
-Php ve css ile alakalı işlevsel kod blokları.
+# Php ve Css İle Alakalı İşlevsel Komutlar
+Gerektiği durumlarda bazen işimizi hızla çözecek kod bloklarına ihtiyaç duymaktayız. Kendimce sık kullandığım işlevsel komutları bir araya getirdim.
+---
+* ## [Php ve Mysql](php/islevsel_kodlar.md)
+* ## [Css](css/islevsel_kodlar.md)
