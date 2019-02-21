@@ -55,7 +55,7 @@ while ($row = mysql_fetch_object($query_gorunen)) {
 ```
 if (isset($_POST['submit'])) {
 
-	/* [fname] => KASIM
+    /* [fname] => KASIM
     [e-mail] => kasim1411@gmail.com
     [tel] => 05385644299
     [message] => WEQWE   */
@@ -114,30 +114,30 @@ if (isset($_POST['submit'])) {
 
 <form method="POST" enctype="multipart/form-data">
 
-				<div>
-					<input type="text" name="fname" class="contact-form-name" required placeholder="<?=( re('dil') == 'en' ? 'Full Name' :  'Ad ve Soyad'  )?>">
-				</div>
+	<div>
+		<input type="text" name="fname" class="contact-form-name" required placeholder="<?=( re('dil') == 'en' ? 'Full Name' :  'Ad ve Soyad'  )?>">
+	</div>
 
-				<div>
-					<input type="email" name="e-mail" class="contact-form-name" required placeholder="E-mail">
-				</div>
+	<div>
+		<input type="email" name="e-mail" class="contact-form-name" required placeholder="E-mail">
+	</div>
 
-				<div>
-					<input type="tel" name="tel" class="contact-form-name" required placeholder="<?=( re('dil') == 'en' ? 'Phone Number' :  'İrtibat Numarınız'  )?>">
-				</div>
+	<div>
+		<input type="tel" name="tel" class="contact-form-name" required placeholder="<?=( re('dil') == 'en' ? 'Phone Number' :  'İrtibat Numarınız'  )?>">
+	</div>
 
-				<div>
-					<span id="filename"><?=( re('dil') == 'en' ? 'Select your file' :  'Dosyanızı Seçiniz'  )?></span>
-					<label for="file-upload"><?=( re('dil') == 'en' ? 'Browse' :  'Yükle'  )?><input type="file" id="file-upload" name="resume"></label>
-				</div>
+	<div>
+		<span id="filename"><?=( re('dil') == 'en' ? 'Select your file' :  'Dosyanızı Seçiniz'  )?></span>
+		<label for="file-upload"><?=( re('dil') == 'en' ? 'Browse' :  'Yükle'  )?><input type="file" id="file-upload" name="resume"></label>
+	</div>
 
-				<div>
-					<textarea type="text" name="message" class="contact-form-name" placeholder="<?=( re('dil') == 'en' ? 'Message' :  'Mesaj ve Belirtmek İstedikleriniz.'  )?>"></textarea>
-				</div>
+	<div>
+		<textarea type="text" name="message" class="contact-form-name" placeholder="<?=( re('dil') == 'en' ? 'Message' :  'Mesaj ve Belirtmek İstedikleriniz.'  )?>"></textarea>
+	</div>
 
-				<button type="submit" name="submit"><?=( re('dil') == 'en' ? 'Submit' :  'Gönder'  )?></button>
-				<div class="result"><?=$statusMsg?></div>
-			</form>
+	<button type="submit" name="submit"><?=( re('dil') == 'en' ? 'Submit' :  'Gönder'  )?></button>
+	<div class="result"><?=$statusMsg?></div>
+</form>
 ```
 ---
 
