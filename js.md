@@ -38,6 +38,7 @@ function convert(unixtime){
 /* Basit bir ajax request'i */
 
 /* Javascript tarafı */
+
        $.ajax({
             url: ajaxURL,
             type: 'POST',
@@ -57,6 +58,7 @@ function convert(unixtime){
         });
 
 /* Php tarafı */
+
       <?php
       $out = array(
           'status' => 0,
