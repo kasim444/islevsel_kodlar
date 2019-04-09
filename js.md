@@ -1,7 +1,6 @@
-/* Unixtime'ı datetime'a çevirme */
+## Unixtime'ı datetime'a çevirme
+
 function convert(unixtime){
-
-
    
     // Months array
     var months_arr = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
@@ -35,9 +34,9 @@ function convert(unixtime){
 }
 
 
-/* Basit bir ajax request'i */
+## Basit bir ajax request'i
 
-/* Javascript tarafı */
+### Javascript tarafı
 
        $.ajax({
             url: ajaxURL,
@@ -57,7 +56,7 @@ function convert(unixtime){
             }
         });
 
-/* Php tarafı */
+### Php tarafı
 
       <?php
       $out = array(
