@@ -1,3 +1,38 @@
+## JSON Data'yı Gruplayarak Yeniden Sıralama
+           const data = [
+                {
+                  "tarih": "1556532884",
+                  "indirim_tutarı": "2.44",
+                  "neden": "test4",
+                  "urun_adi": "Türk Kahvesi",
+                  "musteri_adi": "Kasim",
+                  "personel_adi": "alper"
+                },
+                {
+                  "tarih": "1556532622",
+                  "indirim_tutarı": "10",
+                  "neden": "test4",
+                  "urun_adi": "Duygu Deneme",
+                  "musteri_adi": "Kasim",
+                  "personel_adi": "alper"
+                }
+              ];
+
+            function groupBy(objectArray, property) {
+              return objectArray.reduce(function (acc, obj) {
+                var key = obj[property];
+                if (!acc[key]) {
+                  acc[key] = [];
+                }
+                acc[key].push(obj);
+                return acc;
+              }, {});
+            }
+
+            const siraliData = groupBy(data, "urun_adi");
+            // siraliData => {Türk Kahvesi: Array(1), Duygu Deneme: Array(1)}
+
+
 ## Unixtime'ı datetime'a çevirme
 
 
