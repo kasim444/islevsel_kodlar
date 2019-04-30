@@ -33,6 +33,58 @@
             // siraliData => {Türk Kahvesi: Array(1), Duygu Deneme: Array(1)}
 
 
+## Obje Türündeki Datayı Manipüle Etme Örneği
+           Object.keys(siraliData).forEach(
+                      key => {
+                                 let indAraToplam = 0;
+                                 let prodInfo = "";
+
+                                 /* ilgili ürüne ana başlığı ekleyelim */
+                                 prodInfo += `
+                                 <tr class="urunKategoriBaslik">
+                                            <td></td>
+                                            <td class="headerTd">${key}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                 </tr>`;
+
+                                 /* ilgili ürüne ait kayıtları ekleyelim */
+                                 siraliData[key].map(indirim => {
+                                            prodInfo += `
+                                                       <tr class="prodInfo">
+                                                                  <td>${convert(indirim.tarih)}</td>
+                                                                  <td>${indirim.urun_adi}</td>
+                                                                  <td class="ind_tutar">${indirim.indirim_tutarı} ₺</td>
+                                                                  <td class="ilkHarfBuyuk">${indirim.neden}</td>
+                                                                  <td class="ilkHarfBuyuk">${indirim.musteri_adi}</td>
+                                                                  <td class="ilkHarfBuyuk">${indirim.personel_adi}</td>
+                                                       </tr>`;
+                                            /* ürün bazlı toplam indirimi hesaplayalım */
+                                            indAraToplam += parseFloat(indirim.indirim_tutarı);
+                                            genelIndirimToplamı += parseFloat(indirim.indirim_tutarı);
+                                 });
+
+                                 /* ürün bazlı toplam indirimi ekleyelim */
+                                 prodInfo += `
+                                 <tr class="prodInfo">
+                                            <td></td>
+                                            <td class="ara_toplam">Ara Toplam :</td>
+                                            <td class="ara_toplam">${indAraToplam.toFixed(2)} ₺</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                 </tr>`;
+
+
+                                 /* tablomuza ürün bazlı kayıtları ekleyelim */
+                                 raporKasaTable.innerHTML += prodInfo;
+
+                      }
+
+           );
+           
 ## Unixtime'ı datetime'a çevirme
 
 
@@ -121,3 +173,5 @@
       }
 
       echo json_encode($out);
+
+
