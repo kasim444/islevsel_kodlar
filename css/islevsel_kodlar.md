@@ -25,3 +25,10 @@ transition: all .3s ease;
 @media only screen and (min-width: 1200px) {...}
 ```
 ---
+
+
+## Sık Kullandığım Mobil İçin Gerekli Css Media Tag'ı
+```
+@media (max-width: 639px) {...}
+
+```
