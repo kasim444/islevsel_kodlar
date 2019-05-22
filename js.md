@@ -176,7 +176,7 @@
 
 
 
-### Başlangıç Loading Animasyonu
+## Başlangıç Loading Animasyonu
            //HEADER TAG INA EKLE
            <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
            //BODY İÇERİSİNE ALTTAKİNİ YAZ
