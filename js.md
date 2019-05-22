@@ -175,3 +175,51 @@
       echo json_encode($out);
 
 
+
+### Başlangıç Loading Animasyonu
+           //HEADER TAG INA EKLE
+           <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+           //BODY İÇERİSİNE ALTTAKİNİ YAZ
+           <style>
+           /* Preloader */
+           #preloader {
+               position:fixed;
+               top:0;
+               left:0;
+               right:0;
+               bottom:0;
+               background-color:#fff; /* sayfa yüklenirken gösterilen arkaplan rengimiz */
+               z-index:99; /* efektin arkada kalmadığından emin oluyoruz */
+           }
+           #status {
+               width:200px;
+               height:200px;
+               position:absolute;
+               left:50%;
+               top:50%;
+               background-image:url(resimklasorumuz/yukleniyor.gif); /* burası yazının ilk başında bahsettiğimiz animasyonu çağırır */
+               background-repeat:no-repeat;
+               background-position:center;
+               margin:-100px 0 0 -100px;
+           }
+           </style>
+
+           <!-- Preloader -->
+           <div id="preloader">
+               <div id="status">&nbsp;</div>
+           </div>
+
+           //FOOTER
+           <!-- Preloader -->
+           <script type="text/javascript">
+               //<![CDATA[
+                   $(window).load(function() { // makes sure the whole site is loaded
+                       $('#status').fadeOut(); // will first fade out the loading animation
+                       $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+                       $('body').delay(350).css({'overflow':'visible'});
+                   })
+               //]]>
+           </script>
+
+
+
