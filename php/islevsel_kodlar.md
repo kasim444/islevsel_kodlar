@@ -5,6 +5,17 @@
 UPDATE musteriler_alan_adlari SET b_tarih=UNIX_TIMESTAMP(FROM_UNIXTIME(b_tarih) + INTERVAL '$yil_fetch->yenileme_miktarı' YEAR) WHERE id='$domain_id'
 ```
 ---
+
+## İlgili Id Veritabanında Yok İse Kayıt Etme SQL Query'si
+
+```
+If Not Exists(SELECT * FROM cari_liste WHERE KOD='120.010')
+Begin
+INSERT INTO cari_liste(KOD, ISIM) VALUES ('120.010', 'GÜREL MERMER SAN  VE TİC A.Ş')
+End
+```
+---
+
 ## String'in belirli bir bölümünü Türkçe desteği ile almak istiyorsak
 
 ```
