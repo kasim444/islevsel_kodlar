@@ -1,8 +1,15 @@
 # Php ve mysql ile alakalı işlevsel komutlar
-## Mysql Query'si ile mevcut unixtime güncelleme (gün, ay, yıl gibi)
+## MySQL Query'si ile mevcut unixtime güncelleme (gün, ay, yıl gibi)
 
 ```
 UPDATE musteriler_alan_adlari SET b_tarih=UNIX_TIMESTAMP(FROM_UNIXTIME(b_tarih) + INTERVAL '$yil_fetch->yenileme_miktarı' YEAR) WHERE id='$domain_id'
+```
+---
+
+## MsSQL'de pagination için kullanılan komut ( MySQL'deki gibi limit kullanılmıyor. )
+
+```
+SELECT * FROM TableName ORDER BY id OFFSET 10 ROWS FETCH NEXT 10 ROWS ONLY;
 ```
 ---
 
