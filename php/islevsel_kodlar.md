@@ -6,6 +6,68 @@ UPDATE musteriler_alan_adlari SET b_tarih=UNIX_TIMESTAMP(FROM_UNIXTIME(b_tarih) 
 ```
 ---
 
+## Basit bir pagination örneği
+```
+// Not: Pagination için gerekli kütüphane https://github.com/stefangabos/Zebra_Pagination
+/* php tarafı */
+require 'Zebra_Pagination.php';
+
+date_default_timezone_set('Europe/Istanbul');
+$db = new PDO("sqlsrv:Server=localhost;Database=tabloadi", "root", "");
+if (!$db) {
+    die('Error connecting to the database!<br>Make sure you have specified correct values for host, username, password and database.');
+}
+
+$bloklar = $db->query("SELECT blok.* FROM blok ORDER BY blok.blok_no DESC")->fetchAll();
+
+
+$records_per_page = 10;
+
+
+// instantiate the pagination object
+$pagination = new Zebra_Pagination();
+
+// the number of total records is the number of records in the array
+$pagination->records(count($bloklar));
+
+// records per page
+$pagination->records_per_page($records_per_page);
+
+// here's the magic: we need to display *only* the records for the current page
+$bloklar = array_slice(
+    $bloklar,
+    (($pagination->get_page() - 1) * $records_per_page),
+    $records_per_page
+);
+
+/* ön yüz tarafı */
+
+
+<table id="tablo" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th style="background: LightBlue;padding-left:35px;font-size:12px;width:100%;">
+                Blok No
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($bloklar as $blok) : ?>
+        <tr id="normaltablo">
+            <td style="padding-left:44px;">
+                <a href="stok_duzenle.php?blok_no=<?=$blok['blok_no']?>"><?=$blok['blok_no']?></a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<div class="text-center">
+    <?php $pagination->render(); ?>
+</div>
+```
+---
+
 ## MsSQL'de pagination için kullanılan komut ( MySQL'deki gibi limit kullanılmıyor. )
 
 ```
@@ -122,7 +184,7 @@ if (isset($_POST['submit'])) {
 
     	$last_id = mysql_insert_id();
     	$statusMsg .= '';
-    	
+
     } else {
     	$statusMsg .= "Error: " . $sql . "<br>" . mysql_error();
     }
@@ -158,4 +220,3 @@ if (isset($_POST['submit'])) {
 </form>
 ```
 ---
-

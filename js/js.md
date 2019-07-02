@@ -1,3 +1,30 @@
+## Basit bir debounce ajax search işlemi
+            // Not: Debounce fonksiyonunu kullanabilmek için kullanılan jquery ile çalışan kütüphane https://github.com/cowboy/jquery-throttle-debounce
+            // Searchbox'tan arama yapılırsa debounce ile ajax işlemini başlatalım
+            $('#search_text').keyup( $.debounce( 250, function(){
+                var search = $(this).val();
+                search = search.toUpperCase();
+                $('#result2').html('');
+                $('#tablo2').html('');
+                load_data(search);
+            }));
+            /* ajax işlemini çağıran metot */
+            function load_data(query) {
+                $.ajax({
+                    url: "stok_fetch.php",
+                    method: "post",
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        $('#result2').html('');
+                        $('#result2').html(data);
+                    }
+                });
+            }
+
+---
+
 ## JSON Data'yı Gruplayarak Yeniden Sıralama
            const data = [
                 {
@@ -32,6 +59,9 @@
             const siraliData = groupBy(data, "urun_adi");
             // siraliData => {Türk Kahvesi: Array(1), Duygu Deneme: Array(1)}
 
+
+
+---
 
 ## Obje Türündeki Datayı Manipüle Etme Örneği
            Object.keys(siraliData).forEach(
@@ -84,7 +114,10 @@
                       }
 
            );
-           
+
+
+---
+
 ## Unixtime'ı datetime'a çevirme
 
 
@@ -121,7 +154,13 @@
       }
 
 
+
+---
+
 ## Basit bir ajax request'i
+
+
+---
 
 ### Javascript tarafı
 
@@ -143,6 +182,9 @@
             }
         });
 
+
+---
+
 ### Php tarafı
 
       <?php
@@ -162,8 +204,8 @@
 
           case 'getRestaurantState':
 
-          $updateSettings = $Restoran->getRestaurantState($state);   
-          $out['result'] = $updateSettings;    
+          $updateSettings = $Restoran->getRestaurantState($state);
+          $out['result'] = $updateSettings;
           break;
 
           default:
@@ -175,6 +217,9 @@
       echo json_encode($out);
 
 
+
+
+---
 
 ## Başlangıç Loading Animasyonu
            //HEADER TAG INA EKLE
@@ -220,6 +265,3 @@
                    })
                //]]>
            </script>
-
-
-

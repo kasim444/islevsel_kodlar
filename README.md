@@ -4,4 +4,4 @@ Gerektiği durumlarda bazen işimizi hızla çözecek kod bloklarına ihtiyaç d
 * ## [Php ve Mysql](php/islevsel_kodlar.md)
 * ## [PHP Class](php/class.md)
 * ## [Css](css/islevsel_kodlar.md)
-* ## [Javascript](js.md)
+* ## [Javascript](js/js.md)
