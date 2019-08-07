@@ -1,4 +1,12 @@
 # Mssql'de Sık Karşılaşılan Örnekler
+## Mssql'de last insert id alma
+```
+$sql = $db->query("INSERT INTO packing_list(packing_list_name, packing_list_date) OUTPUT inserted.packing_list_id VALUES('Yeni Çeki Listesi', '$bugun')");
+$sql->setFetchMode(PDO::FETCH_ASSOC);
+$sql->execute();
+$sorgu = $sql->fetch();
+echo $sorgu["packing_list_id"];
+```
 
 ## Mssql'de import  ve insert edilecek veriler için SET IDENTITY ON ve OFF kullanımı
 ```
