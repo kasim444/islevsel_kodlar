@@ -1,4 +1,11 @@
 # Mssql'de Sık Karşılaşılan Örnekler
+
+## Mssql'de utf8 karakter çözümü
+```
+$mermer_tip = mb_convert_encoding($mermer_tip, "UTF-8", "ISO-8859-9");
+
+```
+
 ## Mssql'de last insert id alma
 ```
 $sql = $db->query("INSERT INTO packing_list(packing_list_name, packing_list_date) OUTPUT inserted.packing_list_id VALUES('Yeni Çeki Listesi', '$bugun')");
