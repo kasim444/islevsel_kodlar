@@ -45,3 +45,16 @@ function actuatedNormalize(size) {
   }
 }
 ```
+
+## React navigation hooks yardımı ile herhangi bir componentten prop aktarmadan navigasyon istersek.
+
+```
+import {useNavigation} from 'react-navigation-hooks';
+const {navigate} = useNavigation();
+<LinkButton
+  title="Giriş Yap"
+  onPress={() => {
+    navigate('Login');
+  }}
+/>
+```
