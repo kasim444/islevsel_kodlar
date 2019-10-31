@@ -58,3 +58,11 @@ const {navigate} = useNavigation();
   }}
 />
 ```
+
+## Scroll view içerisindeki elemanların ekranın sonunda gözükmeme problemini gidermek istersek.
+
+```
+<ScrollView contentContainerStyle={{paddingBottom: 60}} >
+    {this.renderItems()}
+</ScrollView>
+```
