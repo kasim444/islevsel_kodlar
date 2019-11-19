@@ -32,3 +32,14 @@ transition: all .3s ease;
 @media (max-width: 639px) {...}
 
 ```
+
+## Yazıyı belirli bir satır sayısı ile sınırlamak istersek
+```
+overflow: hidden;
+text-overflow: ellipsis;
+line-height: 22.5px;
+max-height: 135px;
+-webkit-line-clamp: 6;
+-webkit-box-orient: vertical;
+
+```

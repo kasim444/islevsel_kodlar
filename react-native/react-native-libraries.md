@@ -28,4 +28,7 @@
   <li>
     Linear Gradient: https://github.com/react-native-community/react-native-linear-gradient
   </li>
+  <li>
+    Settings Page: https://github.com/evetstech/react-native-settings-list
+  </li>
 </ul>
