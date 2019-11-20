@@ -130,6 +130,28 @@ const {navigate} = useNavigation();
   />
 ```
 
+## Eğer uygulama herhangi bir nedenden dolayı çökerse uygulanacak adımlar
+````
+If you don't have cocoa pods installed you need to sudo gem install cocoapods
+
+cd /ios
+run pod install
+cd ..
+delete build folder
+run react-native run-ios
+if error persists,
+
+delete build folder again
+open the /ios folder in x-code
+navigate File -> Project Settings -> Build System -> change (Shared workspace settings and Per-User workspace settings): Build System -> Legacy Build System
+````
+
+## Eğer uygulama Invariant Violation: Module AppRegistry is not a registered callabel module (calling runApplication) nedenden dolayı çökerse uygulanacak adımlar
+````
+watchman watch-del-all, and react-native start --reset-cache and then react-native run-ios
+````
+
+
 ## Bir cihazın küçük boyutta olup olmadığını anlamak için
 
 ```
