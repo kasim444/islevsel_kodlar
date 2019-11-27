@@ -31,4 +31,7 @@
   <li>
     Settings Page: https://github.com/evetstech/react-native-settings-list
   </li>
+  <li>
+    Grid & Flex: https://github.com/GeekyAnts/react-native-easy-grid
+  </li>
 </ul>
