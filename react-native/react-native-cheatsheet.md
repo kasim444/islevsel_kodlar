@@ -231,3 +231,10 @@ const styles = StyleSheet.create({
 ```
 Use extraData: to refresh your <FlatList> ... data={this.props.searchBookResults} extraData={this.state.refresh} onPress={()={this.setState({ refresh: !refresh})}
 ```
+
+
+## Custom font kullanmak istersek
+
+```
+https://medium.com/@mehran.khan/ultimate-guide-to-use-custom-fonts-in-react-native-77fcdf859cf4
+```
