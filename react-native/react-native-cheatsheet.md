@@ -225,3 +225,9 @@ const styles = StyleSheet.create({
 });
 
 ```
+
+## react-native-snap-carousel veya flatlist'de renderitem metodu içerisinde herhangi bir şekilde state in yenilendiği durumda component rerender olmuyor ise
+
+```
+Use extraData: to refresh your <FlatList> ... data={this.props.searchBookResults} extraData={this.state.refresh} onPress={()={this.setState({ refresh: !refresh})}
+```

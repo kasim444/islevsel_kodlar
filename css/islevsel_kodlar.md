@@ -23,6 +23,10 @@ transition: all .3s ease;
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {...}
+
+// between two different devices size
+@media screen and (min-width: 1280px) and (max-width: 14400px) {
+
 ```
 ---
 

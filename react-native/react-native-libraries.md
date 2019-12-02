@@ -34,4 +34,7 @@
   <li>
     Grid & Flex: https://github.com/GeekyAnts/react-native-easy-grid
   </li>
+  <li>
+    Image Crop: https://github.com/ivpusic/react-native-image-crop-picker
+  </li>
 </ul>
