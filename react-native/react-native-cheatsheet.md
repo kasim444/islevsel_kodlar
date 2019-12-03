@@ -229,12 +229,39 @@ const styles = StyleSheet.create({
 ## react-native-snap-carousel veya flatlist'de renderitem metodu içerisinde herhangi bir şekilde state in yenilendiği durumda component rerender olmuyor ise
 
 ```
-Use extraData: to refresh your <FlatList> ... data={this.props.searchBookResults} extraData={this.state.refresh} onPress={()={this.setState({ refresh: !refresh})}
+  Use extraData: to refresh your <FlatList> ... data={this.props.searchBookResults} extraData={this.state.refresh} onPress={()={this.setState({ refresh: !refresh})}
 ```
 
 
 ## Custom font kullanmak istersek
 
 ```
-https://medium.com/@mehran.khan/ultimate-guide-to-use-custom-fonts-in-react-native-77fcdf859cf4
+  https://medium.com/@mehran.khan/ultimate-guide-to-use-custom-fonts-in-react-native-77fcdf859cf4
+```
+
+## Image'e overlay background'a verme
+
+```
+  <View>
+    <Image source={require('./assets/climbing_mountain.jpeg')} style=  {StyleSheet.absoluteFillObject}} resizeMode='cover'>
+      <Text>Hello</Text>
+    </Image>
+    <View style={styles.overlay} />
+  </View>
+  const styles = StyleSheet.create({
+    overlay: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: 'rgba(0,0,0,0.5)'
+    }
+  })
+
+  absoluteFillObject is the same as
+
+  {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0
+  }
 ```
