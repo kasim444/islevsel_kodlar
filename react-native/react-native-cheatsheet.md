@@ -148,7 +148,7 @@ navigate File -> Project Settings -> Build System -> change (Shared workspace se
 
 ## Eğer uygulama Invariant Violation: Module AppRegistry is not a registered callabel module (calling runApplication) nedenden dolayı çökerse uygulanacak adımlar
 ````
-watchman watch-del-all, and react-native start --reset-cache and then react-native run-ios
+  watchman watch-del-all, and react-native start --reset-cache and then react-native run-ios
 ````
 
 
@@ -183,46 +183,46 @@ const styles =  StyleSheet.create({
 # Modal box üzerinde iken input focus olunca keyboard un altında kalma problemi olduğu zaman.
 
 ```
-import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Dimensions, Keyboard} from 'react-native';
-import {Colors} from '../../const/Styles';
-import Modal, {ModalContent, SlideAnimation} from 'react-native-modals';
-const {height: HEIGHT} = Dimensions.get('window');
+  import React, {useEffect, useState} from 'react';
+  import {View, StyleSheet, Dimensions, Keyboard} from 'react-native';
+  import {Colors} from '../../const/Styles';
+  import Modal, {ModalContent, SlideAnimation} from 'react-native-modals';
+  const {height: HEIGHT} = Dimensions.get('window');
 
-const SelectPickerModal = ({children, ...props}) => {
-  const [keyboardSpace, setKeyboardSpace] = useState(0);
-  useEffect(() => {
-    //for get keyboard height
-    Keyboard.addListener('keyboardDidShow', frames => {
-      if (!frames.endCoordinates) return;
-      setKeyboardSpace(frames.endCoordinates.height);
-    });
-    Keyboard.addListener('keyboardDidHide', frames => {
-      setKeyboardSpace(0);
-    });
-  }, []);
-  return (
-    <Modal.BottomModal
-      {...props}
-      modalStyle={{
-        top: keyboardSpace ? HEIGHT * 0.1 - keyboardSpace : 0,
-      }}>
-      <View style={styles.modalContainer}>
-        <View style={styles.modalInnerContainer}>
-          <ModalContent style={styles.modalContent}>{children}</ModalContent>
+  const SelectPickerModal = ({children, ...props}) => {
+    const [keyboardSpace, setKeyboardSpace] = useState(0);
+    useEffect(() => {
+      //for get keyboard height
+      Keyboard.addListener('keyboardDidShow', frames => {
+        if (!frames.endCoordinates) return;
+        setKeyboardSpace(frames.endCoordinates.height);
+      });
+      Keyboard.addListener('keyboardDidHide', frames => {
+        setKeyboardSpace(0);
+      });
+    }, []);
+    return (
+      <Modal.BottomModal
+        {...props}
+        modalStyle={{
+          top: keyboardSpace ? HEIGHT * 0.1 - keyboardSpace : 0,
+        }}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalInnerContainer}>
+            <ModalContent style={styles.modalContent}>{children}</ModalContent>
+          </View>
         </View>
-      </View>
-    </Modal.BottomModal>
-  );
-};
+      </Modal.BottomModal>
+    );
+  };
 
-export default SelectPickerModal;
+  export default SelectPickerModal;
 
-const styles = StyleSheet.create({
-  modalContent: {
-    justifyContent: 'space-around',
-  },
-});
+  const styles = StyleSheet.create({
+    modalContent: {
+      justifyContent: 'space-around',
+    },
+  });
 
 ```
 
