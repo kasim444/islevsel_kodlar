@@ -1,0 +1,86 @@
+{
+  "editor.renderWhitespace": "boundary",
+  "editor.rulers": [100],
+  "editor.cursorBlinking": "solid",
+  "explorer.confirmDelete": false,
+  "git.autofetch": true,
+  "gitlens.gitCommands.skipConfirmations": [
+  "fetch:command",
+  "stash-push:command",
+  "switch:command",
+  "push:command"
+  ],
+  "workbench.iconTheme": "ayu",
+  "emmet.includeLanguages": {
+  "html": "html",
+  "javascript": "javascriptreact"
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 5000,
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.shell.osx": "zsh",
+  "editor.fontFamily": "Operator Mono, Fira Code",
+  "editor.fontSize": 14,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "bounded",
+  "editor.lineHeight": 24,
+  "explorer.decorations.badges": false,
+  "files.exclude": {
+  "**/node_modules": true
+  },
+  // "editor.formatOnPaste": true,
+  // "editor.formatOnSave": true,
+  "workbench.colorTheme": "Ayu Mirage Bordered",
+  "files.trimTrailingWhitespace": true,
+  "window.zoomLevel": 1,
+  "editor.cursorBlinking": "smooth",
+  "editor.fontLigatures": true,
+  "prettier.jsxBracketSameLine": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "[markdown]": {
+  "editor.renderWhitespace": "all",
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.parameterHints.enabled": false,
+  "editor.quickSuggestions": false,
+  "editor.snippetSuggestions": "none",
+  },
+  "gitlens.mode.active": "zen",
+  "cSpell.userWords": [
+  "GELDİN!"
+  ],
+  "cSpell.enabledLanguageIds": [
+  "asciidoc",
+  "c",
+  "csharp",
+  "css",
+  "git-commit",
+  "html",
+  "jade",
+  "javascript",
+  "javascriptreact",
+  "json",
+  "jsonc",
+  "latex",
+  "less",
+  "markdown",
+  "plaintext",
+  "pug",
+  "scala",
+  "scss",
+  "text",
+  "typescript",
+  "typescriptreact",
+  "yaml",
+  "yml"
+  ],
+  "[javascriptreact]": {
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "[javascript]": {
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.startupEditor": "newUntitledFile",
+  }
