@@ -265,3 +265,48 @@ const styles =  StyleSheet.create({
   bottom: 0
   }
 ```
+
+
+## React native navigation'ı route dışarısındaki herhangi bir yerde de kullanabilmek için
+
+````
+  // route component
+  const Switch = createAppContainer(MainNavigator);
+  function AppRouter() {
+    return (
+      <Switch
+        ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }}
+      />
+    );
+  }
+
+  // navigationService.js
+  import {NavigationActions} from 'react-navigation';
+
+  let _navigator;
+
+  function setTopLevelNavigator(navigatorRef) {
+    _navigator = navigatorRef;
+  }
+
+  function navigate(routeName, params) {
+    _navigator.dispatch(
+      NavigationActions.navigate({
+        routeName,
+        params,
+      }),
+    );
+  }
+
+  export default {
+    navigate,
+    setTopLevelNavigator,
+  };
+
+  // anywhere component
+  import NavigatorService from './services/navigator';
+
+  NavigatorService.navigate('Home');
+````
