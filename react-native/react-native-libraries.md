@@ -40,4 +40,7 @@
   <li>
     Version check: https://github.com/kimxogus/react-native-version-check
   </li>
+   <li>
+    Responsive image converter (@x, @2x, @3x)  https://www.iconcutter.com/
+  </li>
 </ul>
