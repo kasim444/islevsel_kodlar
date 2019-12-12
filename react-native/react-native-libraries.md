@@ -37,4 +37,7 @@
   <li>
     Image Crop: https://github.com/ivpusic/react-native-image-crop-picker
   </li>
+  <li>
+    Version check: https://github.com/kimxogus/react-native-version-check
+  </li>
 </ul>
