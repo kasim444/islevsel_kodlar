@@ -310,3 +310,19 @@ const styles =  StyleSheet.create({
 
   NavigatorService.navigate('Home');
 ````
+
+## Textinput focus durumda keyboard açıldığında textinput keyboard un arkasında kalıyor ise
+
+`````
+  <KeyboardAvoidingView
+      keyboardVerticalOffset={64}
+      behavior="padding"
+      style={styles.keyboardAvoidingView}>
+  </KeyboardAvoidingView>
+
+  const styles = StyleSheet.create({
+    keyboardAvoidingView: {
+      flex: 1,
+    },
+  });
+`````
