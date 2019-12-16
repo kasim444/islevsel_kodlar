@@ -265,3 +265,30 @@
                    })
                //]]>
            </script>
+
+## how-to-create-an-array-containing-1-n
+
+        Array(...Array(9)).map((_, i) => i);
+
+        console.log(Array(...Array(9)).map((_, i) => i))
+
+## formik json values to array
+        // formik json data
+        const jsonChild = {"name":"","gender":0,"birthday":"01.01.2013","name1":"QWE","gender1":"0","birthday1":"02.02.2013","name2":"EWQ","gender2":"1","birthday2":"03.03.2013"};
+
+        const size = Object.keys(jsonChild).length;
+
+        const arrayChild = [];
+
+        let count = 0;
+        for (let [key, value] of Object.entries(jsonChild)) {
+        if (jsonChild[`name${count}`] !== undefined)
+        arrayChild.push({
+            name:     `${jsonChild[`name${count}`]}`,
+            gender:   `${jsonChild[`gender${count}`]}`,
+            birthday:   `${jsonChild[`birthday${count}`]}`,
+        });
+        count++;
+        }
+
+        console.log(`updated array ${ JSON.stringify(arrayChild) }`);
