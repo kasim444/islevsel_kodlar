@@ -131,7 +131,8 @@ const {navigate} = useNavigation();
 ```
 
 ## Eğer uygulama herhangi bir nedenden dolayı çökerse uygulanacak adımlar
-````
+
+```
 If you don't have cocoa pods installed you need to sudo gem install cocoapods
 
 cd /ios
@@ -144,13 +145,13 @@ if error persists,
 delete build folder again
 open the /ios folder in x-code
 navigate File -> Project Settings -> Build System -> change (Shared workspace settings and Per-User workspace settings): Build System -> Legacy Build System
-````
+```
 
 ## Eğer uygulama Invariant Violation: Module AppRegistry is not a registered callabel module (calling runApplication) nedenden dolayı çökerse uygulanacak adımlar
-````
-  watchman watch-del-all, and react-native start --reset-cache and then react-native run-ios
-````
 
+```
+  watchman watch-del-all, and react-native start --reset-cache and then react-native run-ios
+```
 
 ## Bir cihazın küçük boyutta olup olmadığını anlamak için
 
@@ -232,7 +233,6 @@ const styles =  StyleSheet.create({
   Use extraData: to refresh your <FlatList> ... data={this.props.searchBookResults} extraData={this.state.refresh} onPress={()={this.setState({ refresh: !refresh})}
 ```
 
-
 ## Custom font kullanmak istersek
 
 ```
@@ -266,10 +266,9 @@ const styles =  StyleSheet.create({
   }
 ```
 
-
 ## React native navigation'ı route dışarısındaki herhangi bir yerde de kullanabilmek için
 
-````
+```
   // route component
   const Switch = createAppContainer(MainNavigator);
   function AppRouter() {
@@ -309,11 +308,11 @@ const styles =  StyleSheet.create({
   import NavigatorService from './services/navigator';
 
   NavigatorService.navigate('Home');
-````
+```
 
 ## Textinput focus durumda keyboard açıldığında textinput keyboard un arkasında kalıyor ise
 
-`````
+```
   <KeyboardAvoidingView
       keyboardVerticalOffset={64}
       behavior="padding"
@@ -325,4 +324,12 @@ const styles =  StyleSheet.create({
       flex: 1,
     },
   });
-`````
+```
+
+## Carousel('react-native-snap-carousel) kütüphanesini kullanırken sliderın ekranda gözükmemesi ama scroll yaptığında gözükme problemini gidermek için
+
+```
+  <Carousel
+    removeClippedSubviews={false}
+  />
+```
