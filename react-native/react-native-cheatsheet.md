@@ -182,8 +182,7 @@ const styles =  StyleSheet.create({
 ```
 
 # Modal box üzerinde iken input focus olunca keyboard un altında kalma problemi olduğu zaman.
-
-```
+````
   import React, {useEffect, useState} from 'react';
   import {View, StyleSheet, Dimensions, Keyboard} from 'react-native';
   import {Colors} from '../../const/Styles';
@@ -224,8 +223,7 @@ const styles =  StyleSheet.create({
       justifyContent: 'space-around',
     },
   });
-
-```
+````
 
 ## react-native-snap-carousel veya flatlist'de renderitem metodu içerisinde herhangi bir şekilde state in yenilendiği durumda component rerender olmuyor ise
 
@@ -268,7 +266,7 @@ const styles =  StyleSheet.create({
 
 ## React native navigation'ı route dışarısındaki herhangi bir yerde de kullanabilmek için
 
-```
+````
   // route component
   const Switch = createAppContainer(MainNavigator);
   function AppRouter() {
@@ -308,11 +306,11 @@ const styles =  StyleSheet.create({
   import NavigatorService from './services/navigator';
 
   NavigatorService.navigate('Home');
-```
+````
 
 ## Textinput focus durumda keyboard açıldığında textinput keyboard un arkasında kalıyor ise
 
-```
+````
   <KeyboardAvoidingView
       keyboardVerticalOffset={64}
       behavior="padding"
@@ -324,12 +322,31 @@ const styles =  StyleSheet.create({
       flex: 1,
     },
   });
-```
+````
 
 ## Carousel('react-native-snap-carousel) kütüphanesini kullanırken sliderın ekranda gözükmemesi ama scroll yaptığında gözükme problemini gidermek için
 
-```
+````
   <Carousel
     removeClippedSubviews={false}
   />
-```
+````
+
+## for input visible problem when open Keyboard
+````
+  /* https://codeburst.io/react-native-keyboard-covering-inputs-72a9d3072689 */
+````
+
+### Belirli ekranlarda bottom menüyü gizlemek istersek
+````
+  /*
+    const SurveysStack = createStackNavigator({
+      Surveys: SurveysScreen,
+      Survey: SurveyScreen
+    },
+    {
+      navigationOptions: ({ navigation }) => ({
+          tabBarVisible: navigation.state.routes[navigation.state.index].routeName === 'Survey' ? false : true
+        })
+    });
+  */
