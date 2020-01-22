@@ -350,3 +350,23 @@ const styles =  StyleSheet.create({
         })
     });
   */
+````
+
+### Spesifik bir component'in yükseklik veya genişliğini elde etmek istersek
+````
+  const useComponentSize = () => {
+  const [size, setSize] = useState(null);
+
+  const onLayout = useCallback(event => {
+    const { width, height } = event.nativeEvent.layout;
+    setSize({ width, height });
+  }, []);
+
+  return [size, onLayout];
+  };
+
+  const Component = () => {
+    const [size, onLayout] = useComponentSize();
+    return <View onLayout={onLayout} />;
+  };
+````
