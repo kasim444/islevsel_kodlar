@@ -370,3 +370,25 @@ const styles =  StyleSheet.create({
     return <View onLayout={onLayout} />;
   };
 ````
+
+### Bir string içerinde değiştirmek istediğimiz bir alan var ise
+````
+  /*
+    Örn: Api üzerinden string içerisinde <br> ve ya &nbsp; gibi html elemenleri gelebiliyor
+    <br> => \n || '&nbsp;' => '\u00A0'
+
+    block.data.text.includes('<br>')
+      ? block.data.text.replaceAll('<br>', '\n')
+      : block.data.text
+    gibi bir metod yapılabilir
+  */
+  String.prototype.replaceAll = function(search, replacement) {
+    var str1 = this.replace(search, replacement);
+    var str2 = this;
+    while (str1 != str2) {
+      str2 = str1;
+      str1 = str1.replace(search, replacement);
+    }
+    return str1;
+  };
+````
