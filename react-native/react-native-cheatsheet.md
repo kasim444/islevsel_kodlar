@@ -392,3 +392,87 @@ const styles =  StyleSheet.create({
     return str1;
   };
 ````
+
+### bir screen den çekilen veriyi header'da props olarak paslamak istiyorsak
+````
+    const passLessonIndexToHeaderComponent = () => {
+        const {index} = navigation.state.params;
+        navigation.setParams({
+          lessonIndex: index,
+        });
+      };
+    useEffect(() => {
+      passLessonIndexToHeaderComponent();
+    }, [surveyId]);
+````
+
+### stack içerisindeki belirli screen'in bottom'ını gizlemek isterk
+````
+  cons TrainingStack = {
+      TrainingSurveyResultPage: {
+      screen: SurveyResultScreen,
+      path: 'surveyresult/:surveyId',
+      navigationOptions: {
+        header: ({navigation}) => (
+          <TrainingSurveyResultPageHeader
+            centerText=""
+            navigation={navigation}
+          />
+        ),
+      },
+    },
+  },
+  {
+    initialRouteName: 'TrainingHomePage',
+    defaultNavigationOptions: {
+      header: <HomePageHeader centerText="Eğitimlerim" />,
+      gesturesEnabled: false,
+    },
+    // navigationOptions: ({navigation}) => {
+    //   return {
+    //     tabBarVisible:
+    //       navigation.state.routes[navigation.state.index].routeName ===
+    //       'TrainingHomePage'
+    //         ? true
+    //         : false,
+    //   };
+    // },
+  },
+);
+````
+
+
+### Hangi screen'de ne kadar zaman geçirdiğini hesaplamak istersek
+`````
+  <Switch
+    onNavigationStateChange={(prevState, currentState, action) => {
+      const currentRouteName = getActiveRouteName(currentState);
+      const previousRouteName = getActiveRouteName(prevState);
+      currDate = prev;
+      if (previousRouteName.routeName !== currentRouteName.routeName) {
+        currDate = moment().format('Do MM YYYY, h:mm:ss');
+        // tracking burada yapılacak
+        const output = moment
+          .utc(
+            moment(currDate, 'DD/MM/YYYY HH:mm:ss').diff(
+              moment(prev, 'DD/MM/YYYY HH:mm:ss'),
+            ),
+          )
+          .format('HH:mm:ss');
+        console.log(
+          ` ${
+            previousRouteName.paramId ? previousRouteName.paramId : 0
+          } nolu ${
+            previousRouteName.routeName
+          } screen'de ${output} süre geçirildi.`,
+        );
+        // tracking burada yapılacak - th£ £nd
+        prev = currDate;
+      }
+    }}
+    ref={navigatorRef => {
+      NavigationService.setTopLevelNavigator(navigatorRef);
+    }}
+    uriPrefix={prefix}
+  />
+`````
