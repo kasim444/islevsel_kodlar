@@ -476,3 +476,53 @@ const styles =  StyleSheet.create({
     uriPrefix={prefix}
   />
 `````
+
+### react navigation tarafındaki oluşturulan path ile deep link kullanım yöntemi
+  Kaynak: https://blog.jscrambler.com/how-to-handle-deep-linking-in-a-react-native-app/
+  Edit: apologies for the misunderstanding. To configure your app to be opened via a link is different depending on the platform.
+
+  IOS
+  First add the following to your Info.plist
+
+  <key>CFBundleURLTypes</key>
+  <array>
+      <dict>
+          <key>CFBundleURLSchemes</key>
+          <array>
+              <string>testapp</string>
+          </array>
+      </dict>
+  </array>
+  If editing in Xcode and not a text editor, create a key called "URL types", under Item 0 create a key called URL Schemes and set Item 0 under URL Schemes equal to a String testapp (or whatever the link should be)
+
+  Next in your AppDelegate.m file add this under your last import
+
+  #import <React/RCTLinkingManager.h>
+
+  Finally, add the following to your `AppDelegate.m` file under `@implementation AppDelegate`
+
+  - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+    sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+  {
+    return [RCTLinkingManager application:application openURL:url
+                        sourceApplication:sourceApplication annotation:annotation];
+  }
+  Now entering testapp:// into an address bar will open your app
+
+  Unfortunately making this link clickable via iMessage will not work. Your best option instead is to host a simple webpage with the following script:
+
+  <script>
+    window.location = "testapp://"
+  </script>
+  Then you could host it at www.testapp.com and it would open your app when the user navigates there.
+
+  Android
+  Add an intent-filter to your AndroidManifest.xml file
+
+  <intent-filter android:label="filter_react_native">
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="http" android:host="testapp" /> // A
+  </intent-filter>
+  That's it! Now http://testapp will open your app on android AND be clickable.
