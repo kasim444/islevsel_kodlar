@@ -44,6 +44,17 @@ text-overflow: ellipsis;
 line-height: 22.5px;
 max-height: 135px;
 -webkit-line-clamp: 6;
--webkit-box-orient: vertical;
+-webkit-box-orient: vertical; 
 
+```
+
+
+## Card'daki header resmini bozmadan render etmek istersek
+```
+&-header {
+  height: 243px;
+  background-size: cover;
+  background-position: 50% 50%;
+  position: relative;
+}
 ```
