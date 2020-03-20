@@ -1,4 +1,5 @@
 ## Basit bir debounce ajax search işlemi
+
             // Not: Debounce fonksiyonunu kullanabilmek için kullanılan jquery ile çalışan kütüphane https://github.com/cowboy/jquery-throttle-debounce
             // Searchbox'tan arama yapılırsa debounce ile ajax işlemini başlatalım
             $('#search_text').keyup( $.debounce( 250, function(){
@@ -26,6 +27,7 @@
 ---
 
 ## JSON Data'yı Gruplayarak Yeniden Sıralama
+
            const data = [
                 {
                   "tarih": "1556532884",
@@ -59,11 +61,10 @@
             const siraliData = groupBy(data, "urun_adi");
             // siraliData => {Türk Kahvesi: Array(1), Duygu Deneme: Array(1)}
 
-
-
 ---
 
 ## Obje Türündeki Datayı Manipüle Etme Örneği
+
            Object.keys(siraliData).forEach(
                       key => {
                                  let indAraToplam = 0;
@@ -115,11 +116,9 @@
 
            );
 
-
 ---
 
 ## Unixtime'ı datetime'a çevirme
-
 
       function convert(unixtime){
 
@@ -153,16 +152,11 @@
           return convdataTime;
       }
 
-
-
 ---
 
 ## Basit bir ajax request'i
 
-
----
-
-### Javascript tarafı
+- Javascript tarafı
 
        $.ajax({
             url: ajaxURL,
@@ -182,10 +176,9 @@
             }
         });
 
-
 ---
 
-### Php tarafı
+- Php tarafı
 
       <?php
       $out = array(
@@ -216,12 +209,10 @@
 
       echo json_encode($out);
 
-
-
-
 ---
 
 ## Başlangıç Loading Animasyonu
+
            //HEADER TAG INA EKLE
            <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
            //BODY İÇERİSİNE ALTTAKİNİ YAZ
@@ -273,6 +264,7 @@
         console.log(Array(...Array(9)).map((_, i) => i))
 
 ## formik json values to array
+
         // formik json data
         const jsonChild = {"name":"","gender":0,"birthday":"01.01.2013","name1":"QWE","gender1":"0","birthday1":"02.02.2013","name2":"EWQ","gender2":"1","birthday2":"03.03.2013"};
 
@@ -292,3 +284,120 @@
         }
 
         console.log(`updated array ${ JSON.stringify(arrayChild) }`);
+
+## simple google map autocomplete input
+
+    ```
+        var locationPermission = $(
+        '.currentCampaignsAutogas__section.permissionDenied'
+        )
+        var campaignMainPage = $(
+        '.currentCampaignsAutogas__section.permissionAllow'
+        )
+        function initAutoComplete() {
+        function initialize() {
+            var input = document.getElementById('locationTextField')
+            var options = {
+            types: ['(regions)'],
+            componentRestrictions: {
+                country: 'tr'
+            }
+            }
+            var autocomplete = new google.maps.places.Autocomplete(input, options)
+
+            autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace()
+
+            if (!place.geometry) {
+                window.alert(
+                "Aramış olduğunuz il veya ilçe bulunamadı: '" + place.name + "'"
+                )
+                return
+            }
+
+            currentAddress = ''
+                .concat(place.address_components[0].short_name, ', ')
+                .concat(place.address_components[1].short_name)
+            $(
+                '.currentCampaignsAutogas__section.permissionAllow .current__city-selection'
+            )
+                .find('span')
+                .text(currentAddress)
+            locationPermission.fadeOut()
+            campaignMainPage.fadeIn()
+            })
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize)
+        }
+
+        function codeLatLng(lat, lng) {
+        var latlng = new google.maps.LatLng(lat, lng)
+        var geocoder = new google.maps.Geocoder()
+        geocoder.geocode({ latLng: latlng }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+                var country = results[0].address_components[3].short_name
+                var city = results[0].address_components[4].short_name
+                currentAddress = ''.concat(country, ', ').concat(city)
+                $(
+                '.currentCampaignsAutogas__section.permissionAllow .current__city-selection'
+                )
+                .find('span')
+                .text(currentAddress)
+                locationPermission.fadeOut()
+                campaignMainPage.fadeIn()
+            } else {
+                alert('No results found')
+            }
+            } else {
+            alert('Geocoder failed due to: ' + status)
+            }
+        })
+        }
+        var getCurrentLocationService = function getCurrentLocationService() {
+        if (navigator.geolocation) {
+            var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+            }
+            navigator.geolocation.getCurrentPosition(
+            function(position) {
+                codeLatLng(position.coords.latitude, position.coords.longitude)
+            },
+            function() {
+                handleLocationError(true, infoWindow, map.getCenter())
+            },
+            options
+            )
+        } else {
+            console.log('current location from handleLocationError') // Browser doesn't support Geolocation
+
+            handleLocationError(false, infoWindow, map.getCenter())
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            console.log(
+            browserHasGeolocation
+                ? 'Error: The Geolocation service failed.'
+                : "Error: Your browser doesn't support geolocation."
+            )
+        }
+        }
+
+        var getCurrentLocationEventListener = function getCurrentLocationEventListener() {
+        document
+            .getElementById('getRequestLocationPermission')
+            .addEventListener('click', function() {
+            getCurrentLocationService()
+            })
+        }
+
+        var mapType = $('#requestPermission').attr('data-type')
+
+        if (mapType === 'currentCampaignsAutogas') {
+            getCurrentLocationEventListener()
+            initAutoComplete()
+        }
+    ```
