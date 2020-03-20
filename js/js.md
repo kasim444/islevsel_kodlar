@@ -401,3 +401,148 @@
             initAutoComplete()
         }
     ```
+
+## another version google map autocomplete input
+
+```
+        // auto complete
+        var input = document.getElementById("locationTextField");
+        var options = {
+          types: ["(regions)"],
+          componentRestrictions: {
+            country: "tr"
+          }
+        };
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+        autocomplete.bindTo("bounds", map); // Set the data fields to return when the user selects a place.
+
+        autocomplete.setFields([
+          "address_components",
+          "geometry",
+          "icon",
+          "name"
+        ]);
+        var infowindow = new google.maps.InfoWindow();
+        var infowindowContent = document.getElementById("infowindow-content");
+        infowindow.setContent(infowindowContent);
+        var marker = new google.maps.Marker({
+          map: map,
+          anchorPoint: new google.maps.Point(0, -29),
+          icon: "./assets/images/icon/ellipse.png",
+          animation: google.maps.Animation.DROP
+        });
+        autocomplete.addListener("place_changed", function() {
+          $("#locationTextField")
+            .trigger("blur")
+            .val(address);
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+
+          if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert(
+              "Aramış olduğunuz il veya ilçe bulunamadı: '" + place.name + "'"
+            );
+            return;
+          }
+
+          visibleSearchAreaForMobile(true); // If the place has a geometry, then present it on a map.
+
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17); // Why 17? Because it looks good.
+          }
+
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+          var address = "";
+
+          if (place.address_components) {
+            address = [
+              (place.address_components[0] &&
+                place.address_components[0].short_name) ||
+                "",
+              (place.address_components[1] &&
+                place.address_components[1].short_name) ||
+                "",
+              (place.address_components[2] &&
+                place.address_components[2].short_name) ||
+                ""
+            ].join(" ");
+          }
+
+          $(".current__city-select-inner").hide();
+          $(".current__city--autoCompleteCountry").text(
+            ""
+              .concat(place.address_components[0].short_name, ", ")
+              .concat(place.address_components[1].short_name)
+          );
+          $(".current__city-select-inner--autoCompleteResult").css(
+            "display",
+            "flex"
+          ); //calculates distance between two points in km's
+
+          function calcDistance(p1, p2) {
+            return (
+              google.maps.geometry.spherical.computeDistanceBetween(p1, p2) /
+              1000
+            ).toFixed(2);
+          }
+
+          var nearedBranches = features.filter(function(_ref2) {
+            var purePosition = _ref2.purePosition;
+            // current lat => place.geometry.location.lat
+            // current lng => place.geometry.location.lng
+            // static feature lat =>  purePosition.lat
+            // static feature lng =>  purePosition.lng
+            var featureLocation = new google.maps.LatLng(
+              purePosition.lat,
+              purePosition.lng
+            );
+            var currentLocation = new google.maps.LatLng(
+              place.geometry.location.lat(),
+              place.geometry.location.lng()
+            ); // return distance(purePosition.lat,
+            //   purePosition.lng, place.geometry.location.lat(),
+            //   place.geometry.location.lng(), "K") < 15
+
+            return calcDistance(currentLocation, featureLocation) < 15;
+          });
+          $(".nearest-branch__leftCol--resultArea").empty();
+          nearedBranches.map(function(branch) {
+            $(".nearest-branch__leftCol--resultArea").append(
+              "\
+                <div class='nearest-branch__leftCol--resultArea--branch' data-branchId=" +
+                branch.id +
+                ">\
+                  <div class='nearest-branch__leftCol--resultArea--branch--leftCol'>\
+                    <div class='nearest-branch__leftCol--resultArea--branch--leftCol__title'>\
+                      " +
+                branch.branchTitle +
+                "\
+                    </div>\
+                    <div class='nearest-branch__leftCol--resultArea--branch--leftCol__subTitle'>\
+                      GO – İpragaz Otogaz\
+                    </div>\
+                    <div class='nearest-branch__leftCol--resultArea--branch--leftCol__address'>\
+                      İnönü Mah. Ankara Cad. <br/> No:45/1 Sancaktepe İstanbul\
+                    </div>\
+                  </div>\
+                  <div class='nearest-branch__leftCol--resultArea--branch--rightCol'>\
+                    <img src='./assets/images/icon/arrow-right.svg' />\
+                  </div>\
+                </div>\
+                "
+            );
+          });
+          $(".nearest-branch__leftCol--resultArea--branch").click(function(e) {
+            toggleVisibleMapBottomGroupButton(true);
+            showBranchDetail($(this).data("branchid"));
+            closeDetailBranch();
+          }); // autocomplete search end
+        }); // close autocomplete result
+```
