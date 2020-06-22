@@ -133,6 +133,7 @@ const {navigate} = useNavigation();
 ## Eğer uygulama herhangi bir nedenden dolayı çökerse uygulanacak adımlar
 
 ```
+for ios
 If you don't have cocoa pods installed you need to sudo gem install cocoapods
 
 cd /ios
@@ -145,6 +146,15 @@ if error persists,
 delete build folder again
 open the /ios folder in x-code
 navigate File -> Project Settings -> Build System -> change (Shared workspace settings and Per-User workspace settings): Build System -> Legacy Build System
+```
+
+```
+for android
+
+delete folder android/app/build
+ rm -rf $GRADLE_HOME/caches/build-cache-*
+./gradlew --stop
+rm -rf ~/.gradle/caches/
 ```
 
 ## Eğer uygulama Invariant Violation: Module AppRegistry is not a registered callabel module (calling runApplication) nedenden dolayı çökerse uygulanacak adımlar
