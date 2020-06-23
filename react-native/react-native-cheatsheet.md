@@ -130,6 +130,31 @@ const {navigate} = useNavigation();
   />
 ```
 
+## "Unable to load script" nedeni ile hata alıyor isek
+
+In the file node_modules\metro-config\src\defaults\blacklist.js
+<b>Replace :</b>
+```javascript
+
+  var sharedBlacklist = [
+    /node_modules[/\\]react[/\\]dist[/\\].*/,
+    /website\/node_modules\/.*/,
+    /heapCapture\/bundle\.js/,
+    /.*\/__tests__\/.*/
+  ];
+```
+<b>with :</b>
+
+```javascript
+
+  var sharedBlacklist = [
+    /node_modules[\/\\]react[\/\\]dist[\/\\].*/,
+    /website\/node_modules\/.*/,
+    /heapCapture\/bundle\.js/,
+    /.*\/__tests__\/.*/
+  ];
+```
+
 ## Eğer uygulama herhangi bir nedenden dolayı çökerse uygulanacak adımlar
 
 ```
