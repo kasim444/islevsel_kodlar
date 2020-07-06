@@ -130,9 +130,35 @@ const {navigate} = useNavigation();
   />
 ```
 
+## "Unable to load script" nedeni ile hata alıyor isek
+
+In the file node_modules\metro-config\src\defaults\blacklist.js
+<b>Replace :</b>
+```javascript
+
+  var sharedBlacklist = [
+    /node_modules[\/\\]react[\/\\]dist[\/\\].*/,
+    /website\/node_modules\/.*/,
+    /heapCapture\/bundle\.js/,
+    /.*\/__tests__\/.*/
+  ];
+```
+<b>with :</b>
+
+```javascript
+
+  var sharedBlacklist = [
+    /node_modules[\/\\]react[\/\\]dist[\/\\].*/,
+    /website\/node_modules\/.*/,
+    /heapCapture\/bundle\.js/,
+    /.*\/__tests__\/.*/
+  ];
+```
+
 ## Eğer uygulama herhangi bir nedenden dolayı çökerse uygulanacak adımlar
 
 ```
+for ios
 If you don't have cocoa pods installed you need to sudo gem install cocoapods
 
 cd /ios
@@ -145,6 +171,15 @@ if error persists,
 delete build folder again
 open the /ios folder in x-code
 navigate File -> Project Settings -> Build System -> change (Shared workspace settings and Per-User workspace settings): Build System -> Legacy Build System
+```
+
+```
+for android
+
+delete folder android/app/build
+ rm -rf $GRADLE_HOME/caches/build-cache-*
+./gradlew --stop
+rm -rf ~/.gradle/caches/
 ```
 
 ## Eğer uygulama Invariant Violation: Module AppRegistry is not a registered callabel module (calling runApplication) nedenden dolayı çökerse uygulanacak adımlar

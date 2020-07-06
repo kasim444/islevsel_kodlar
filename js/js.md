@@ -1,4 +1,5 @@
 ## Basit bir debounce ajax search işlemi
+
             // Not: Debounce fonksiyonunu kullanabilmek için kullanılan jquery ile çalışan kütüphane https://github.com/cowboy/jquery-throttle-debounce
             // Searchbox'tan arama yapılırsa debounce ile ajax işlemini başlatalım
             $('#search_text').keyup( $.debounce( 250, function(){
@@ -26,6 +27,7 @@
 ---
 
 ## JSON Data'yı Gruplayarak Yeniden Sıralama
+
            const data = [
                 {
                   "tarih": "1556532884",
@@ -59,11 +61,10 @@
             const siraliData = groupBy(data, "urun_adi");
             // siraliData => {Türk Kahvesi: Array(1), Duygu Deneme: Array(1)}
 
-
-
 ---
 
 ## Obje Türündeki Datayı Manipüle Etme Örneği
+
            Object.keys(siraliData).forEach(
                       key => {
                                  let indAraToplam = 0;
@@ -115,11 +116,9 @@
 
            );
 
-
 ---
 
 ## Unixtime'ı datetime'a çevirme
-
 
       function convert(unixtime){
 
@@ -153,16 +152,11 @@
           return convdataTime;
       }
 
-
-
 ---
 
 ## Basit bir ajax request'i
 
-
----
-
-### Javascript tarafı
+- Javascript tarafı
 
        $.ajax({
             url: ajaxURL,
@@ -182,10 +176,9 @@
             }
         });
 
-
 ---
 
-### Php tarafı
+- Php tarafı
 
       <?php
       $out = array(
@@ -216,12 +209,10 @@
 
       echo json_encode($out);
 
-
-
-
 ---
 
 ## Başlangıç Loading Animasyonu
+
            //HEADER TAG INA EKLE
            <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
            //BODY İÇERİSİNE ALTTAKİNİ YAZ
@@ -273,6 +264,7 @@
         console.log(Array(...Array(9)).map((_, i) => i))
 
 ## formik json values to array
+
         // formik json data
         const jsonChild = {"name":"","gender":0,"birthday":"01.01.2013","name1":"QWE","gender1":"0","birthday1":"02.02.2013","name2":"EWQ","gender2":"1","birthday2":"03.03.2013"};
 
@@ -292,3 +284,265 @@
         }
 
         console.log(`updated array ${ JSON.stringify(arrayChild) }`);
+
+## simple google map autocomplete input
+
+    ```
+        var locationPermission = $(
+        '.currentCampaignsAutogas__section.permissionDenied'
+        )
+        var campaignMainPage = $(
+        '.currentCampaignsAutogas__section.permissionAllow'
+        )
+        function initAutoComplete() {
+        function initialize() {
+            var input = document.getElementById('locationTextField')
+            var options = {
+            types: ['(regions)'],
+            componentRestrictions: {
+                country: 'tr'
+            }
+            }
+            var autocomplete = new google.maps.places.Autocomplete(input, options)
+
+            autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace()
+
+            if (!place.geometry) {
+                window.alert(
+                "Aramış olduğunuz il veya ilçe bulunamadı: '" + place.name + "'"
+                )
+                return
+            }
+
+            currentAddress = ''
+                .concat(place.address_components[0].short_name, ', ')
+                .concat(place.address_components[1].short_name)
+            $(
+                '.currentCampaignsAutogas__section.permissionAllow .current__city-selection'
+            )
+                .find('span')
+                .text(currentAddress)
+            locationPermission.fadeOut()
+            campaignMainPage.fadeIn()
+            })
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize)
+        }
+
+        function codeLatLng(lat, lng) {
+        var latlng = new google.maps.LatLng(lat, lng)
+        var geocoder = new google.maps.Geocoder()
+        geocoder.geocode({ latLng: latlng }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+                var country = results[0].address_components[3].short_name
+                var city = results[0].address_components[4].short_name
+                currentAddress = ''.concat(country, ', ').concat(city)
+                $(
+                '.currentCampaignsAutogas__section.permissionAllow .current__city-selection'
+                )
+                .find('span')
+                .text(currentAddress)
+                locationPermission.fadeOut()
+                campaignMainPage.fadeIn()
+            } else {
+                alert('No results found')
+            }
+            } else {
+            alert('Geocoder failed due to: ' + status)
+            }
+        })
+        }
+        var getCurrentLocationService = function getCurrentLocationService() {
+        if (navigator.geolocation) {
+            var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+            }
+            navigator.geolocation.getCurrentPosition(
+            function(position) {
+                codeLatLng(position.coords.latitude, position.coords.longitude)
+            },
+            function() {
+                handleLocationError(true, infoWindow, map.getCenter())
+            },
+            options
+            )
+        } else {
+            console.log('current location from handleLocationError') // Browser doesn't support Geolocation
+
+            handleLocationError(false, infoWindow, map.getCenter())
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            console.log(
+            browserHasGeolocation
+                ? 'Error: The Geolocation service failed.'
+                : "Error: Your browser doesn't support geolocation."
+            )
+        }
+        }
+
+        var getCurrentLocationEventListener = function getCurrentLocationEventListener() {
+        document
+            .getElementById('getRequestLocationPermission')
+            .addEventListener('click', function() {
+            getCurrentLocationService()
+            })
+        }
+
+        var mapType = $('#requestPermission').attr('data-type')
+
+        if (mapType === 'currentCampaignsAutogas') {
+            getCurrentLocationEventListener()
+            initAutoComplete()
+        }
+    ```
+
+## another version google map autocomplete input
+
+```
+        // auto complete
+        var input = document.getElementById("locationTextField");
+        var options = {
+          types: ["(regions)"],
+          componentRestrictions: {
+            country: "tr"
+          }
+        };
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+        autocomplete.bindTo("bounds", map); // Set the data fields to return when the user selects a place.
+
+        autocomplete.setFields([
+          "address_components",
+          "geometry",
+          "icon",
+          "name"
+        ]);
+        var infowindow = new google.maps.InfoWindow();
+        var infowindowContent = document.getElementById("infowindow-content");
+        infowindow.setContent(infowindowContent);
+        var marker = new google.maps.Marker({
+          map: map,
+          anchorPoint: new google.maps.Point(0, -29),
+          icon: "./assets/images/icon/ellipse.png",
+          animation: google.maps.Animation.DROP
+        });
+        autocomplete.addListener("place_changed", function() {
+          $("#locationTextField")
+            .trigger("blur")
+            .val(address);
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+
+          if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert(
+              "Aramış olduğunuz il veya ilçe bulunamadı: '" + place.name + "'"
+            );
+            return;
+          }
+
+          visibleSearchAreaForMobile(true); // If the place has a geometry, then present it on a map.
+
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17); // Why 17? Because it looks good.
+          }
+
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+          var address = "";
+
+          if (place.address_components) {
+            address = [
+              (place.address_components[0] &&
+                place.address_components[0].short_name) ||
+                "",
+              (place.address_components[1] &&
+                place.address_components[1].short_name) ||
+                "",
+              (place.address_components[2] &&
+                place.address_components[2].short_name) ||
+                ""
+            ].join(" ");
+          }
+
+          $(".current__city-select-inner").hide();
+          $(".current__city--autoCompleteCountry").text(
+            ""
+              .concat(place.address_components[0].short_name, ", ")
+              .concat(place.address_components[1].short_name)
+          );
+          $(".current__city-select-inner--autoCompleteResult").css(
+            "display",
+            "flex"
+          ); //calculates distance between two points in km's
+
+          function calcDistance(p1, p2) {
+            return (
+              google.maps.geometry.spherical.computeDistanceBetween(p1, p2) /
+              1000
+            ).toFixed(2);
+          }
+
+          var nearedBranches = features.filter(function(_ref2) {
+            var purePosition = _ref2.purePosition;
+            // current lat => place.geometry.location.lat
+            // current lng => place.geometry.location.lng
+            // static feature lat =>  purePosition.lat
+            // static feature lng =>  purePosition.lng
+            var featureLocation = new google.maps.LatLng(
+              purePosition.lat,
+              purePosition.lng
+            );
+            var currentLocation = new google.maps.LatLng(
+              place.geometry.location.lat(),
+              place.geometry.location.lng()
+            ); // return distance(purePosition.lat,
+            //   purePosition.lng, place.geometry.location.lat(),
+            //   place.geometry.location.lng(), "K") < 15
+
+            return calcDistance(currentLocation, featureLocation) < 15;
+          });
+          $(".nearest-branch__leftCol--resultArea").empty();
+          nearedBranches.map(function(branch) {
+            $(".nearest-branch__leftCol--resultArea").append(
+              "\
+                <div class='nearest-branch__leftCol--resultArea--branch' data-branchId=" +
+                branch.id +
+                ">\
+                  <div class='nearest-branch__leftCol--resultArea--branch--leftCol'>\
+                    <div class='nearest-branch__leftCol--resultArea--branch--leftCol__title'>\
+                      " +
+                branch.branchTitle +
+                "\
+                    </div>\
+                    <div class='nearest-branch__leftCol--resultArea--branch--leftCol__subTitle'>\
+                      GO – İpragaz Otogaz\
+                    </div>\
+                    <div class='nearest-branch__leftCol--resultArea--branch--leftCol__address'>\
+                      İnönü Mah. Ankara Cad. <br/> No:45/1 Sancaktepe İstanbul\
+                    </div>\
+                  </div>\
+                  <div class='nearest-branch__leftCol--resultArea--branch--rightCol'>\
+                    <img src='./assets/images/icon/arrow-right.svg' />\
+                  </div>\
+                </div>\
+                "
+            );
+          });
+          $(".nearest-branch__leftCol--resultArea--branch").click(function(e) {
+            toggleVisibleMapBottomGroupButton(true);
+            showBranchDetail($(this).data("branchid"));
+            closeDetailBranch();
+          }); // autocomplete search end
+        }); // close autocomplete result
+```
