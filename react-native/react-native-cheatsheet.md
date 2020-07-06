@@ -477,6 +477,12 @@ const styles =  StyleSheet.create({
   />
 `````
 
+### ios simulatorde açık olan app leri görüntülemek istersek
+```
+  cmd + shift + h 2 times
+```
+
+
 ### react navigation tarafındaki oluşturulan path ile deep link kullanım yöntemi
   Kaynak: https://blog.jscrambler.com/how-to-handle-deep-linking-in-a-react-native-app/
   Edit: apologies for the misunderstanding. To configure your app to be opened via a link is different depending on the platform.
