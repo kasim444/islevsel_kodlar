@@ -1,11 +1,14 @@
 # Css ile alakalı işlevsel komutlar
+
 ## Transtion Animate
 
 ```
 transition: all .3s ease;
 -webkit-transition: all .3s ease;
 ```
+
 ---
+
 ## Responsive Media Tags
 
 ```
@@ -28,28 +31,41 @@ transition: all .3s ease;
 @media screen and (min-width: 1280px) and (max-width: 14400px) {
 
 ```
+
 ---
 
-
 ## Sık Kullandığım Mobil İçin Gerekli Css Media Tag'ı
+
 ```
 @media (max-width: 639px) {...}
 
 ```
 
 ## Yazıyı belirli bir satır sayısı ile sınırlamak istersek
+
+- Güncel method
+
+```
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+```
+
+- Eski method
+
 ```
 overflow: hidden;
 text-overflow: ellipsis;
 line-height: 22.5px;
 max-height: 135px;
 -webkit-line-clamp: 6;
--webkit-box-orient: vertical; 
+-webkit-box-orient: vertical;
 
 ```
 
-
 ## Card'daki header resmini bozmadan render etmek istersek
+
 ```
 &-header {
   height: 243px;
