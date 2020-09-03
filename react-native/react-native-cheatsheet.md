@@ -517,6 +517,32 @@ const styles =  StyleSheet.create({
   cmd + shift + h 2 times
 ```
 
+### Flatlist Infinity Scroll Multiple Request Problem
+```javascript
+{
+// ...
+  const [
+    onEndReachedCalledDuringMomentum,
+    setOnEndReachedCalledDuringMomentum,
+  ] = useState(false);
+
+return (
+  <FlatList
+    // ...
+    onEndReached={() => {
+      if (!onEndReachedCalledDuringMomentum) {
+        _handleLoadMore();
+        setOnEndReachedCalledDuringMomentum(true);
+      }
+    }}
+    onEndReachedThreshold={0.5}
+    onMomentumScrollBegin={() => {
+      setOnEndReachedCalledDuringMomentum(false);
+    }}
+  />
+)
+};
+```
 
 ### react navigation tarafındaki oluşturulan path ile deep link kullanım yöntemi
   Kaynak: https://blog.jscrambler.com/how-to-handle-deep-linking-in-a-react-native-app/
