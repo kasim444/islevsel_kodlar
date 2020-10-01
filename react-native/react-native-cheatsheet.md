@@ -1,5 +1,14 @@
 # React Native'de karşılabilecek sorunlara çözümler
 
+## Android tarafında geliştirme ortamında uygulamayı başlatmak isteyip 'Package "com.yourapp.yourapp" signatures do not match the previously installed version; ignoring!' hatası ile karşılaşırsak.
+
+Herşeyden evvel bilgisayara bağlı ve bir cep telefonu ile geliştirme yapıyor isek telefondaki yayına çıkmış ilgili uygulamayı kaldırmalıyız. Aynı şekilde emülatör üzerinden bir geliştirme yapıyor isek emülatördeki uygulamayı ilk olarak kaldırmalı!
+
+veya
+
+`adb uninstall "com.yourapp.yourapp"`
+
+
 ## State'timizde ki arrayde eleman var ise silen yok ise eklemek istersek.
 
 ```
