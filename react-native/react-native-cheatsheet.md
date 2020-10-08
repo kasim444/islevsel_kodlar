@@ -8,6 +8,28 @@ veya
 
 `adb uninstall "com.yourapp.yourapp"`
 
+## Testflighhtaki bir sürümü app store da publish etme
+
+If you want to select a build from test flight and make it live on App-store follow these steps.
+
+Note: there should be builds present in the test flight.
+
+Go to https://appstoreconnect.apple.com/
+
+Go to "My apps".
+
+**Step 1**: Click on prepare for submission. [Screenshot for step 1][1]
+
+
+**Step 2**: Scroll down and go to builds section and click on "select your build". [Screenshot for step 2][2]
+
+**Step 3**: Select your build from the list of builds you have uploaded on test flight. [Screenshot for step 3][3]
+
+
+  [1]: https://i.stack.imgur.com/SH6dA.jpg
+  [2]: https://i.stack.imgur.com/Mrjpe.jpg
+  [3]: https://i.stack.imgur.com/yvBRg.jpg
+  
 
 ## State'timizde ki arrayde eleman var ise silen yok ise eklemek istersek.
 
