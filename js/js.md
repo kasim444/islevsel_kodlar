@@ -1,33 +1,34 @@
 ## Basit bir debounce ajax search işlemi
 
-            // Not: Debounce fonksiyonunu kullanabilmek için kullanılan jquery ile çalışan kütüphane https://github.com/cowboy/jquery-throttle-debounce
-            // Searchbox'tan arama yapılırsa debounce ile ajax işlemini başlatalım
-            $('#search_text').keyup( $.debounce( 250, function(){
-                var search = $(this).val();
-                search = search.toUpperCase();
-                $('#result2').html('');
-                $('#tablo2').html('');
-                load_data(search);
-            }));
-            /* ajax işlemini çağıran metot */
-            function load_data(query) {
-                $.ajax({
-                    url: "stok_fetch.php",
-                    method: "post",
-                    data: {
-                        query: query
-                    },
-                    success: function(data) {
-                        $('#result2').html('');
-                        $('#result2').html(data);
-                    }
-                });
-            }
-
----
+```
+// Not: Debounce fonksiyonunu kullanabilmek için kullanılan jquery ile çalışan kütüphane https://github.com/cowboy/jquery-throttle-debounce
+// Searchbox'tan arama yapılırsa debounce ile ajax işlemini başlatalım
+$('#search_text').keyup( $.debounce( 250, function(){
+    var search = $(this).val();
+    search = search.toUpperCase();
+    $('#result2').html('');
+    $('#tablo2').html('');
+    load_data(search);
+}));
+/* ajax işlemini çağıran metot */
+function load_data(query) {
+    $.ajax({
+        url: "stok_fetch.php",
+        method: "post",
+        data: {
+            query: query
+        },
+        success: function(data) {
+            $('#result2').html('');
+            $('#result2').html(data);
+        }
+    });
+}
+```
 
 ## JSON Data'yı Gruplayarak Yeniden Sıralama
 
+```
            const data = [
                 {
                   "tarih": "1556532884",
@@ -60,104 +61,104 @@
 
             const siraliData = groupBy(data, "urun_adi");
             // siraliData => {Türk Kahvesi: Array(1), Duygu Deneme: Array(1)}
-
----
+```
 
 ## Obje Türündeki Datayı Manipüle Etme Örneği
 
-           Object.keys(siraliData).forEach(
-                      key => {
-                                 let indAraToplam = 0;
-                                 let prodInfo = "";
+```
+Object.keys(siraliData).forEach(
+  key => {
+    let indAraToplam = 0;
+    let prodInfo = "";
 
-                                 /* ilgili ürüne ana başlığı ekleyelim */
-                                 prodInfo += `
-                                 <tr class="urunKategoriBaslik">
-                                            <td></td>
-                                            <td class="headerTd">${key}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                 </tr>`;
+    /* ilgili ürüne ana başlığı ekleyelim */
+    prodInfo += `
+    <tr class="urunKategoriBaslik">
+      <td></td>
+      <td class="headerTd">${key}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>`;
 
-                                 /* ilgili ürüne ait kayıtları ekleyelim */
-                                 siraliData[key].map(indirim => {
-                                            prodInfo += `
-                                                       <tr class="prodInfo">
-                                                                  <td>${convert(indirim.tarih)}</td>
-                                                                  <td>${indirim.urun_adi}</td>
-                                                                  <td class="ind_tutar">${indirim.indirim_tutarı} ₺</td>
-                                                                  <td class="ilkHarfBuyuk">${indirim.neden}</td>
-                                                                  <td class="ilkHarfBuyuk">${indirim.musteri_adi}</td>
-                                                                  <td class="ilkHarfBuyuk">${indirim.personel_adi}</td>
-                                                       </tr>`;
-                                            /* ürün bazlı toplam indirimi hesaplayalım */
-                                            indAraToplam += parseFloat(indirim.indirim_tutarı);
-                                            genelIndirimToplamı += parseFloat(indirim.indirim_tutarı);
-                                 });
+    /* ilgili ürüne ait kayıtları ekleyelim */
+    siraliData[key].map(indirim => {
+      prodInfo += `
+        <tr class="prodInfo">
+                  <td>${convert(indirim.tarih)}</td>
+                  <td>${indirim.urun_adi}</td>
+                  <td class="ind_tutar">${indirim.indirim_tutarı} ₺</td>
+                  <td class="ilkHarfBuyuk">${indirim.neden}</td>
+                  <td class="ilkHarfBuyuk">${indirim.musteri_adi}</td>
+                  <td class="ilkHarfBuyuk">${indirim.personel_adi}</td>
+        </tr>`;
+      /* ürün bazlı toplam indirimi hesaplayalım */
+      indAraToplam += parseFloat(indirim.indirim_tutarı);
+      genelIndirimToplamı += parseFloat(indirim.indirim_tutarı);
+    });
 
-                                 /* ürün bazlı toplam indirimi ekleyelim */
-                                 prodInfo += `
-                                 <tr class="prodInfo">
-                                            <td></td>
-                                            <td class="ara_toplam">Ara Toplam :</td>
-                                            <td class="ara_toplam">${indAraToplam.toFixed(2)} ₺</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                 </tr>`;
+    /* ürün bazlı toplam indirimi ekleyelim */
+    prodInfo += `
+    <tr class="prodInfo">
+      <td></td>
+      <td class="ara_toplam">Ara Toplam :</td>
+      <td class="ara_toplam">${indAraToplam.toFixed(2)} ₺</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>`;
 
 
-                                 /* tablomuza ürün bazlı kayıtları ekleyelim */
-                                 raporKasaTable.innerHTML += prodInfo;
+    /* tablomuza ürün bazlı kayıtları ekleyelim */
+    raporKasaTable.innerHTML += prodInfo;
 
-                      }
+  }
 
-           );
-
----
+);
+```
 
 ## Unixtime'ı datetime'a çevirme
 
-      function convert(unixtime){
+```
+function convert(unixtime){
 
-          // Months array
-          var months_arr = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+    // Months array
+    var months_arr = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
 
-          // Convert timestamp to milliseconds
-          var date = new Date(unixtime*1000);
+    // Convert timestamp to milliseconds
+    var date = new Date(unixtime*1000);
 
-          // Year
-          var year = date.getFullYear();
+    // Year
+    var year = date.getFullYear();
 
-          // Month
-          var month = months_arr[date.getMonth()];
+    // Month
+    var month = months_arr[date.getMonth()];
 
-          // Day
-          var day = date.getDate();
+    // Day
+    var day = date.getDate();
 
-          // Hours
-          var hours = date.getHours();
+    // Hours
+    var hours = date.getHours();
 
-          // Minutes
-          var minutes = "0" + date.getMinutes();
+    // Minutes
+    var minutes = "0" + date.getMinutes();
 
-          // Seconds
-          var seconds = "0" + date.getSeconds();
+    // Seconds
+    var seconds = "0" + date.getSeconds();
 
 
-          var convdataTime = day+'-'+month+'-'+year+' '+hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    var convdataTime = day+'-'+month+'-'+year+' '+hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
-          return convdataTime;
-      }
-
----
+    return convdataTime;
+}
+```
 
 ## Basit bir ajax request'i
 
 - Javascript tarafı
 
+```
        $.ajax({
             url: ajaxURL,
             type: 'POST',
@@ -175,11 +176,11 @@
                 console.log(JSON.stringify(data));
             }
         });
-
----
+```
 
 - Php tarafı
 
+```
       <?php
       $out = array(
           'status' => 0,
@@ -208,11 +209,11 @@
       }
 
       echo json_encode($out);
-
----
+```
 
 ## Başlangıç Loading Animasyonu
 
+```
            //HEADER TAG INA EKLE
            <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
            //BODY İÇERİSİNE ALTTAKİNİ YAZ
@@ -256,15 +257,19 @@
                    })
                //]]>
            </script>
+```
 
 ## how-to-create-an-array-containing-1-n
 
-        Array(...Array(9)).map((_, i) => i);
+```
+  Array(...Array(9)).map((_, i) => i);
 
-        console.log(Array(...Array(9)).map((_, i) => i))
+  console.log(Array(...Array(9)).map((_, i) => i))
+```
 
 ## formik json values to array
 
+```
         // formik json data
         const jsonChild = {"name":"","gender":0,"birthday":"01.01.2013","name1":"QWE","gender1":"0","birthday1":"02.02.2013","name2":"EWQ","gender2":"1","birthday2":"03.03.2013"};
 
@@ -284,6 +289,7 @@
         }
 
         console.log(`updated array ${ JSON.stringify(arrayChild) }`);
+```
 
 ## simple google map autocomplete input
 

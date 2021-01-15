@@ -9,3 +9,4 @@
 - ## [React Cheatsheet](react/react-tricks.md)
 - ## [React Native Cheatsheet](react-native/react-native-cheatsheet.md)
 - ## [React Native Libraries](react-native/react-native-libraries.md)
+- ## [Liquid Cheatsheet](liquid/index.md)
