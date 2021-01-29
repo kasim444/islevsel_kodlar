@@ -1,5 +1,95 @@
 # Css ile alakalı işlevsel komutlar
 
+## Responsive Image with Ascpect Ratio
+
+```
+.AspectRatio {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.AspectRatio::before {
+  content: "";
+  display: block;
+}
+
+.AspectRatio > img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.AspectRatio--withFallback > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.no-js .AspectRatio > img {
+  display: none !important;
+}
+
+@supports (--css: variables) {
+  /* For dynamic one, we use CSS variables, which makes it only compatible for newer browsers */
+  .AspectRatio--withFallback {
+    padding-bottom: 0 !important; /* For older browsers we use the padding-bottom trick, so make sure to remove it here */
+  }
+
+  .AspectRatio::before {
+    padding-bottom: calc(100% / (var(--aspect-ratio)));
+  }
+
+  .AspectRatio > img,
+  .no-js .AspectRatio > noscript img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.AspectRatio--square::before {
+  padding-bottom: 100%;
+}
+
+.AspectRatio--short::before {
+  padding-bottom: 75%;
+}
+
+.AspectRatio--tall::before {
+  padding-bottom: 150%;
+}
+
+.AspectRatio--square > img,
+.AspectRatio--short > img,
+.AspectRatio--tall > img {
+  position: absolute;
+  width: auto;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+@supports ((-o-object-fit: contain) or (object-fit: contain)) {
+  .AspectRatio--square > img,
+  .AspectRatio--short > img,
+  .AspectRatio--tall > img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+}
+```
+
+---
+
 ## Transtion Animate
 
 ```
